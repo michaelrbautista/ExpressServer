@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
-router.use(express.json())
+router.use(express.json());
+router.use(express.urlencoded({ extended: true }));
+const bodyParser = require('body-parser');
+router.use(bodyParser.json());
 
 const stripe = require('stripe')(process.env.STRIPE_TEST_SECRET_KEY)
 
