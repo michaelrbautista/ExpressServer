@@ -13,7 +13,7 @@ router.post("/paymentSheet", async function(req, res) {
         const paymentIntent = await stripe.paymentIntents.create({
             amount: req.body.amount,
             currency: 'usd',
-            application_fee_amount: req.body.amount * 0.05 * 100,
+            application_fee_amount: 200,
             transfer_data: {
               destination: req.body.destinationAccountId,
             },
