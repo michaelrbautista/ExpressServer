@@ -17,7 +17,7 @@ router.post("/create", async function(req, res) {
              }
         });
 
-        res.send(account)
+        res.send(account);
     } catch (e) {
         throw new Error(e);
     }
@@ -36,7 +36,18 @@ router.post("/accountLink", async function (req, res) {
             },
           });
 
-        res.send(accountLink)
+        res.send(accountLink);
+    } catch (e) {
+        throw new Error(e);
+    }
+})
+
+// Get stripe account
+router.get("/:stripeAccountId", async function (req, res) {
+    try {
+        const account = await stripe.accounts.retrieve(req.query.stripeAccountId);
+
+        res.send(account);
     } catch (e) {
         throw new Error(e);
     }
