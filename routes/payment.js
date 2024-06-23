@@ -4,8 +4,9 @@ router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
 const bodyParser = require('body-parser');
 router.use(bodyParser.json());
+const stripeSecretKey = process.env.STRIPE_LIVE_SECRET_KEY
 
-const stripe = require('stripe')('sk_test_51P3659KRUtiKYn5d3lm7pT9qcMjrIIEVIOI7oeiLeHoo60pQJOxNo9PEjlsMvxBaYLtqXLQSoWZN577CcBw2cO2T00aheP8Me9')
+const stripe = require('stripe')(stripeSecretKey);
 
 // Create stripe account
 router.post("/paymentSheet", async function(req, res) {

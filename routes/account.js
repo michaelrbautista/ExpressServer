@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const express = require('express');
 const router = express.Router();
 router.use(express.json());
@@ -5,7 +7,15 @@ router.use(express.urlencoded({ extended: true }));
 const bodyParser = require('body-parser');
 router.use(bodyParser.json());
 
-const stripe = require('stripe')('sk_test_51P3659KRUtiKYn5d3lm7pT9qcMjrIIEVIOI7oeiLeHoo60pQJOxNo9PEjlsMvxBaYLtqXLQSoWZN577CcBw2cO2T00aheP8Me9')
+var stripeSecretKey;
+if (process.env.NODE_ENV === 'production') {
+    console.log('RUNNING IN PRODUCTION')
+    stripeSecretKey = process.env.STRIPE_LIVE_SECRET_KEY;
+} else {
+    stripeSecretKey = process.env.STRIPE_TEST_SECRET_KEY;
+}
+
+const stripe = require('stripe')(stripeSecretKey);
 
 // Create stripe account
 router.post("/create", async function(req, res) {
