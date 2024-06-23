@@ -12,9 +12,11 @@ if (process.env.NODE_ENV === 'production') {
     console.log('RUNNING IN PRODUCTION ENVIRONMENT')
     stripeSecretKey = process.env.STRIPE_LIVE_SECRET_KEY;
 } else {
-    console.log('RUNNING IN TEST ENVIRONMENT')
+    console.log('\nRUNNING IN TEST ENVIRONMENT\n')
     stripeSecretKey = process.env.STRIPE_TEST_SECRET_KEY;
 }
+
+const stripe = require('stripe')(stripeSecretKey);
 
 // Create stripe account
 router.post("/paymentSheet", async function(req, res) {
