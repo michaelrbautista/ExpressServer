@@ -9,7 +9,6 @@ router.use(bodyParser.json());
 
 var stripeSecretKey;
 if (process.env.NODE_ENV === 'production') {
-    console.log('RUNNING IN PRODUCTION')
     stripeSecretKey = process.env.STRIPE_LIVE_SECRET_KEY;
 } else {
     stripeSecretKey = process.env.STRIPE_TEST_SECRET_KEY;
